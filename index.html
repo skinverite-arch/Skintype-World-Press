@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verité Skin Type Test</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Jost:wght@400;500&display=swap');
+
+  :root{
+    --cream:#e5ded2;
+    --cream-track:#f0ece4;
+    --taupe:#685d54;
+    --chocolate:#3b322c;
+    --bordeaux:#7a3a3a;
+    --white:#faf8f4;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--cream);
+    color:var(--chocolate);
+    font-family:'Jost', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height:1.55;
+    min-height:100vh;
+  }
+  .top-rule{height:6px;background:var(--bordeaux);width:100%;}
+  .wrap{
+    max-width:640px;
+    margin:0 auto;
+    padding:48px 24px 80px;
+  }
+  h1{
+    font-family:'Playfair Display', serif;
+    font-weight:900;
+    letter-spacing:0.04em;
+    text-align:center;
+    font-size:28px;
+    margin:0 0 6px;
+    color:var(--chocolate);
+  }
+  .kicker{
+    text-align:center;
+    color:var(--taupe);
+    font-size:15px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin-bottom:36px;
+  }
+  .card{
+    background:var(--white);
+    border:1px solid #ddd3c2;
+    border-radius:18px;
+    padding:36px 32px;
+    box-shadow:0 2px 20px rgba(59,50,43,0.06);
+  }
+  p{margin:0 0 16px; font-size:16px;}
+  .lead{font-size:17px;}
+  .btn{
+    display:inline-block;
+    width:100%;
+    text-align:center;
+    background:var(--taupe);
+    color:var(--white);
+    border:none;
+    border-radius:999px;
+    padding:16px 20px;
+    font-family:'Jost', sans-serif;
+    font-size:16px;
+    letter-spacing:0.03em;
+    cursor:pointer;
+    transition:background 0.2s ease, transform 0.1s ease;
+    margin-top:8px;
+  }
+  .btn:hover{background:var(--chocolate);}
+  .btn:active{transform:scale(0.99);}
+  .btn-secondary{
+    background:transparent;
+    color:var(--taupe);
+    border:1.5px solid var(--taupe);
+  }
+  .btn-secondary:hover{background:var(--cream-track); color:var(--chocolate);}
+  .progress-label{
+    color:var(--taupe);
+    font-size:13px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  .progress-track{
+    background:var(--cream-track);
+    border:1px solid #ddd3c2;
+    border-radius:999px;
+    height:8px;
+    overflow:hidden;
+    margin-bottom:28px;
+  }
+  .progress-fill{
+    background:var(--taupe);
+    height:100%;
+    border-radius:999px;
+    transition:width 0.35s ease;
+  }
+  .question-text{
+    font-family:'Playfair Display', serif;
+    font-weight:700;
+    font-size:21px;
+    line-height:1.4;
+    margin-bottom:24px;
+    color:var(--chocolate);
+  }
+  .answers{display:flex; flex-direction:column; gap:10px;}
+  .answer-btn{
+    text-align:left;
+    background:var(--cream-track);
+    border:1.5px solid #ddd3c2;
+    border-radius:12px;
+    padding:14px 18px;
+    font-family:'Jost', sans-serif;
+    font-size:15.5px;
+    color:var(--chocolate);
+    cursor:pointer;
+    transition:all 0.15s ease;
+  }
+  .answer-btn:hover{
+    background:var(--taupe);
+    color:var(--white);
+    border-color:var(--taupe);
+  }
+  .type-code{
+    font-family:'Playfair Display', serif;
+    font-weight:900;
+    font-size:40px;
+    letter-spacing:0.08em;
+    text-align:center;
+    color:var(--chocolate);
+    margin:4px 0 30px;
+  }
+  .bar-row{margin-bottom:26px;}
+  .bar-labels{
+    display:flex;
+    justify-content:space-between;
+    font-size:14px;
+    color:var(--chocolate);
+    margin-bottom:8px;
+  }
+  .bar-track{
+    position:relative;
+    background:var(--cream-track);
+    border:1.5px solid var(--taupe);
+    border-radius:999px;
+    height:22px;
+    overflow:visible;
+  }
+  .bar-fill{
+    background:var(--taupe);
+    height:100%;
+    border-radius:999px 0 0 999px;
+    transition:width 0.6s ease;
+  }
+  .bar-marker{
+    position:absolute;
+    top:50%;
+    width:18px;
+    height:18px;
+    background:var(--chocolate);
+    border:3px solid var(--white);
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+    transition:left 0.6s ease;
+  }
+  .bar-pct{
+    text-align:center;
+    font-size:13px;
+    color:var(--taupe);
+    font-weight:600;
+    margin-top:6px;
+  }
+  .description{font-size:16px; margin-top:8px;}
+  .description p{margin-bottom:14px;}
+  footer{
+    text-align:center;
+    margin-top:40px;
+    color:var(--taupe);
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-size:15px;
+    letter-spacing:0.03em;
+  }
+</style>
+</head>
+<body>
+<div class="top-rule"></div>
+<div class="wrap">
+  <h1>VERITÉ SKIN TYPE TEST</h1>
+  <div class="kicker" id="kicker">Discover your skin, in full</div>
+  <div class="card" id="app"></div>
+  <footer>verité.skin</footer>
+</div>
+
+<script>
+const QUESTIONS = {"OD": [{"q": "How does your skin look about 4-5 hours after cleansing, with no products applied?", "a": ["Tight, may start to flake", "Matte, with no discomfort", "A slight shine only in the T-zone", "Noticeable shine across the whole face"]}, {"q": "What does your skin feel like 2-3 hours after cleansing, if you haven't applied anything?", "a": ["Dry and tight", "Comfortable, skin feels neutral", "Slightly oily in the center of the face", "Distinctly oily, skin looks shiny"]}, {"q": "How do your pores look in daylight?", "a": ["Practically invisible", "Visible only up close", "Enlarged in the T-zone", "Enlarged across the whole face"]}, {"q": "If you press a piece of blotting paper to your face a few hours after cleansing, what shows up on it?", "a": ["Nothing, the paper stays clean", "Barely visible traces", "Noticeable oily marks in the T-zone", "The paper is saturated with oil across the whole area"]}, {"q": "What happens to your foundation over the course of the day?", "a": ["It settles into fine lines and emphasizes dry patches", "It stays even for most of the day", "It starts to 'move' in the T-zone by evening", "It loses its matte finish within a couple of hours"]}, {"q": "How often do you notice flaking or rough patches on your face?", "a": ["Regularly, especially in winter", "Very rarely", "Almost never", "Never — if anything, my skin runs oily"]}, {"q": "How often do you get blackheads or clogged pores?", "a": ["Practically never", "Occasionally, in specific spots", "Regularly in the T-zone", "Often, across the whole face"]}, {"q": "What does your skin feel like right after rinsing with water, before applying anything else?", "a": ["Strong tightness, almost uncomfortable", "A light feeling of cleanliness, no tightness", "Tightness that fades quickly, skin feels 'revived'", "Barely any tightness at all"]}, {"q": "Does your T-zone (forehead, nose, chin) differ from your cheeks in oiliness?", "a": ["No, the whole face is equally dry", "The difference is barely noticeable", "The T-zone is noticeably oilier than the cheeks", "The whole face is equally oily"]}, {"q": "How does your skin respond to weather changes — heat or humidity?", "a": ["Barely changes in heat; dryness increases in winter", "Minor changes in either direction", "Noticeable shine appears in the heat", "Skin gets oily quickly in any warm weather"]}, {"q": "How much does your skin 'ask for' moisturizer?", "a": ["Without it, discomfort and tightness build up over the day", "Moisturizer feels nice, but skipping it is fine too", "A light one works well; anything richer feels like too much", "Any moisturizer feels unnecessary and heavy"]}, {"q": "How quickly does your hair get oily at the roots after washing it?", "a": ["Very slowly — I can go several days without washing", "At a normal pace, about every 2-3 days", "Fairly quickly, roots need washing again within a day", "Very quickly, roots look oily within a few hours"]}, {"q": "Which textures are usually most comfortable on your skin?", "a": ["Rich, thick creams and balms", "Light creams with a balanced texture", "Gel-creams that absorb quickly, with no film-like feel", "Light gels or fluids with no oil base"]}, {"q": "When did breakouts or noticeably oily skin first show up for you?", "a": ["Practically never happened", "Occasionally, as a teenager", "As a teenager, and periodically now too", "Very early, and it's continued ever since"]}, {"q": "What would happen to your skin if you went a full day without any products at all?", "a": ["It would get dry, possibly start flaking", "It would stay comfortable for most of the day", "Shine would appear in the T-zone by evening", "Skin would look noticeably oily by midday"]}, {"q": "What happens if you skip moisturizer for a day or two?", "a": ["Skin reacts right away with dryness and discomfort", "Almost nothing changes", "A slight shine appears sooner than usual", "Skin quickly turns oily and 'heavy'"]}, {"q": "What does your skin look like right after a workout or heavy sweating?", "a": ["Just damp, no real change in oiliness", "Fresh, without much shine", "Noticeable shine appears in the T-zone", "The whole face gets shiny and needs blotting"]}, {"q": "How often do you need mattifying products (powder, blotting sheets, primer) during the day?", "a": ["Never use them", "Rarely, for special occasions", "Once or twice a day", "Several times a day, or it starts to shine"]}, {"q": "How does your skin feel in a room with air conditioning or heating?", "a": ["It quickly starts to feel tight and dry", "Barely reacts", "Gets a bit more comfortable, with less shine", "Practically no reaction to dry air"]}, {"q": "How would you describe your skin type overall, for as long as you can remember?", "a": ["Always dry", "Normal, rarely off-balance", "T-zone noticeably oilier than the rest of the face", "Always prone to oiliness"]}], "SR": [{"q": "What usually happens the first time you try a new product on your face?", "a": ["Practically never any reaction", "Occasional slight tingling that fades quickly", "Redness or stinging often shows up", "Almost always some irritation, itching, or a rash"]}, {"q": "How often does your face flush with no obvious reason (emotions, food, temperature)?", "a": ["Almost never", "Occasionally, and briefly", "Fairly often, especially in heat or cold", "Very often, and the redness lingers"]}, {"q": "How does your skin react to fragranced products (scented creams, lotions)?", "a": ["No reaction, I use them without issue", "Occasional mild discomfort", "Irritation often shows up", "I avoid them almost entirely because of reactions"]}, {"q": "What happens to your skin in a hot or stuffy room?", "a": ["Nothing in particular", "Mild redness that fades quickly", "Blotches or a rash appear", "Strong redness or a burning feeling"]}, {"q": "Have you had past episodes of strong redness, a rash, or flaking with no clear cause?", "a": ["Never", "Once or twice in my life", "Periodically, a few times a year", "Regularly — it's a familiar part of my experience with my skin"]}, {"q": "Has your facial skin ever reacted to a new laundry detergent, fabric, or cosmetic wipes?", "a": ["Never", "Very rarely", "Sometimes", "Often — I have to choose hypoallergenic options"]}, {"q": "How does your skin react to toners or products containing alcohol?", "a": ["Tolerates them well, no discomfort", "Occasional mild tingling", "Dryness or irritation often shows up", "Almost always stings or turns red"]}, {"q": "What happens when you use acid-based products (AHA/BHA) or scrubs?", "a": ["Skin tolerates them well, no reactions", "Occasional mild tingling", "Redness often appears afterward", "Almost always strong stinging or irritation"]}, {"q": "How does your skin react to cold wind or a sharp change in temperature?", "a": ["Barely reacts at all", "Mild redness that fades quickly", "Noticeable redness or tightness appears", "Strong stinging, flaking, or a rash"]}, {"q": "What happens to your facial skin after a hot shower or steam?", "a": ["Nothing in particular", "Mild redness that fades quickly", "Noticeable redness that lingers longer", "Strong redness or a burning sensation"]}, {"q": "How does your skin react to rubbing briskly with a towel after cleansing?", "a": ["No reaction, no redness or discomfort", "Mild, temporary redness that fades quickly", "Noticeable redness that lasts a few minutes", "Strong redness or a feeling of irritation"]}, {"q": "If you've tried retinol or similar products, how did your skin react at first?", "a": ["Never tried it, or no reaction", "Mild flaking that passed quickly", "Noticeable redness and irritation early on", "A strong reaction — I had to stop using it"]}, {"q": "Do you notice your skin clearly reacting with a rash or redness during stressful periods?", "a": ["No, my skin isn't connected to stress", "Occasional mild changes", "Breakouts or redness show up fairly often", "There's almost always a noticeable reaction to stress"]}, {"q": "How does your skin feel right after a facial treatment (extractions, a peel, massage)?", "a": ["No reaction, all fine", "Mild redness that fades within an hour or two", "Redness lasts until the end of the day", "A strong reaction, needing a day or two to settle"]}, {"q": "Are small blood vessels or visible redness (broken capillaries) noticeable on your face?", "a": ["None at all", "Barely visible in a couple of spots", "Visible on the cheeks or nose", "A noticeable network of visible vessels in several areas"]}, {"q": "How does your skin react to sunscreen?", "a": ["Any formula works fine", "Sometimes I have to be picky about the formula", "Irritation or breakouts often show up", "Almost all of them cause a reaction — I have to seek out special ones"]}, {"q": "Has a new product ever had to be dropped from your routine because of a reaction?", "a": ["Never happened", "Once or twice", "A few times", "This happens fairly regularly"]}, {"q": "How often do you feel itching on your face for no clear reason?", "a": ["Practically never", "Occasionally", "Periodically", "Fairly often"]}, {"q": "Does the skin around your lips ever get irritated by toothpaste or oral care products?", "a": ["Never", "Very rarely", "Sometimes mild irritation shows up", "Fairly often there's irritation around the lips"]}, {"q": "How would you rate your willingness to try new skincare products?", "a": ["I try almost anything without worry", "I choose carefully, but it's usually fine", "I often worry about a reaction and patch-test first", "Very cautious — my skin reacts to new things often"]}], "PN": [{"q": "What usually happens to your skin in the sun without protection, over a short period of time?", "a": ["Almost always just turns red, barely tans", "Sometimes tans a little, sometimes turns red", "Tans fairly easily and evenly", "Tans very quickly and deeply"]}, {"q": "Do you have freckles on your face?", "a": ["None at all", "A few, barely visible", "A noticeable amount, especially in summer", "A lot, across the whole face"]}, {"q": "What's left on your skin after a blemish or irritation heals?", "a": ["Usually nothing at all", "Sometimes a faint mark that fades quickly", "Often a dark mark lasting weeks", "Almost always a noticeable pigmented mark that lingers"]}, {"q": "What was your mother's skin like in her youth, in terms of pigmentation?", "a": ["No tendency toward spots or uneven tone", "A low tendency — only occasional minor marks", "A noticeable tendency toward spots or uneven tone", "Very pronounced pigmentation or spots"]}, {"q": "What was your father's skin like in his youth, in terms of pigmentation?", "a": ["No tendency toward spots or uneven tone", "A low tendency — only occasional minor marks", "A noticeable tendency toward spots or uneven tone", "Very pronounced pigmentation or spots"]}, {"q": "If age spots have appeared for you, when did that start — or, going by your family, when did it start for your parents?", "a": ["Haven't appeared yet, and it's a late occurrence in my family", "More likely after 40-50", "Fairly early, before 40", "Very early — noticeable already in youth"]}, {"q": "How even is your skin tone without makeup?", "a": ["Very even, no marks", "Generally even, with a few small irregularities", "Noticeable unevenness in a few areas", "Pronounced unevenness, with many spots or areas of differing tone"]}, {"q": "Do you notice more sun-related marks accumulating on your face over the years?", "a": ["No, barely noticeable", "Slightly", "Yes, noticeable with each summer", "Yes, very pronounced"]}, {"q": "Roughly how many moles do you have on your face and body?", "a": ["Very few", "A moderate amount", "Quite a lot", "A great many, all over the body"]}, {"q": "How quickly does a noticeable tan appear in summer?", "a": ["Barely appears even over a long time", "After a few weeks of regular sun exposure", "Within a few days", "After just one or two sun exposures"]}, {"q": "Have you noticed spots or uneven tone intensifying during certain periods (hormonal changes, pregnancy)?", "a": ["No, never noticed that", "Very slightly", "Yes, noticeably", "Yes, very pronounced and long-lasting"]}, {"q": "If your skin gets injured — a cut, a burn, an insect bite — what's left after it heals?", "a": ["The mark disappears without a trace", "Sometimes a faint shadow remains", "Often a dark mark lasting months", "Almost always a mark that lingers for a long time"]}, {"q": "How long does a tan last after summer ends?", "a": ["Fades very quickly", "A few weeks", "A few months", "Lasts almost until the next summer"]}, {"q": "Are there areas on your face with a noticeably different tone (around the mouth, under the eyes, on the forehead)?", "a": ["No, tone is uniform", "A barely noticeable difference", "A noticeable difference in a few areas", "A pronounced difference, easy to spot"]}, {"q": "Have you seen — or considered seeing — a dermatologist or aesthetician about pigmented spots?", "a": ["Never needed to", "Thought about it, but no clear issue", "Yes, there are specific spots that bother me", "Yes, it's an ongoing topic in my skincare visits"]}, {"q": "Is the skin around your eyes or lips darker than the rest of your face?", "a": ["No difference", "A barely noticeable difference", "Noticeably darker", "Significantly darker, it stands out"]}, {"q": "What was your grandparents' skin like overall, in terms of pigmentation?", "a": ["No tendency toward spots or uneven tone", "A low tendency — only occasional minor marks", "A noticeable tendency toward spots or uneven tone", "Very pronounced pigmentation (age spots, for example)"]}, {"q": "How has your skin tone changed over the last 5-10 years?", "a": ["Practically unchanged", "A few new spots have appeared", "Noticeably more spots have appeared", "Tone has changed significantly, with far more spots"]}, {"q": "Is there a difference in how your skin reacted to breakouts as a teenager versus now, in terms of marks left behind?", "a": ["Never left marks, even as a teenager", "Rarely before, and rarely now", "Noticeable before, and just as noticeable now", "Marks have started lingering more and more visibly with age"]}, {"q": "How would you describe your skin's overall tendency toward pigmentation?", "a": ["Not prone to spots", "A low tendency, occasional cases", "Noticeably prone", "Very prone — it's my main skincare concern"]}], "WT": [{"q": "What happens to your smile lines (around the eyes) once you stop smiling?", "a": ["Disappear immediately, skin is smooth", "Fade within a few seconds", "Still slightly visible for a few minutes", "Remain visible even at rest"]}, {"q": "Are lines visible on your forehead when your face is fully relaxed?", "a": ["No lines at all", "Barely visible, only up close", "A few fine lines are noticeable", "Pronounced wrinkles even at rest"]}, {"q": "What does the skin under your eyes look like in the morning after sleep?", "a": ["Smooth, firm", "Slightly crumpled, but fades quickly", "Noticeably thin, with fine creases", "Noticeably slack, with wrinkles under the eyes"]}, {"q": "What was your mother's skin like in her youth, in terms of firmness?", "a": ["Stayed smooth for a long time, wrinkles appeared very late", "First wrinkles appeared closer to 50", "First wrinkles appeared closer to 40", "Wrinkles appeared fairly early, before 40"]}, {"q": "What was your father's skin like in his youth, in terms of firmness?", "a": ["Stayed smooth for a long time, wrinkles appeared very late", "First wrinkles appeared closer to 50", "First wrinkles appeared closer to 40", "Wrinkles appeared fairly early, before 40"]}, {"q": "What was your grandparents' skin like overall, in terms of firmness?", "a": ["Skin stayed smooth for a long time", "Wrinkles appeared moderately, in line with age", "Wrinkles appeared relatively early", "Wrinkles appeared very early, skin 'aged' quickly"]}, {"q": "If you gently pinch the skin on your cheek and let go, how quickly does it spring back?", "a": ["Instantly, no trace at all", "Very quickly, within a second", "Noticeably slower than you'd like", "Slowly — a slight fold remains"]}, {"q": "Do you notice changes in your neck skin compared to your face (loss of firmness, lines)?", "a": ["No changes at all", "Minor, barely noticeable", "Noticeable fine lines or slackness", "Pronounced changes — neck skin clearly looks older than the face"]}, {"q": "How pronounced are your nasolabial folds (from the nose to the corners of the mouth)?", "a": ["Practically unnoticeable", "A faint shadow when smiling", "Noticeable even at rest", "Deep, clearly defined folds"]}, {"q": "How often have you used sunscreen over the past 10-15 years?", "a": ["Regularly, almost daily", "Mostly in summer or on vacation", "On and off, irregularly", "Rarely or almost never"]}, {"q": "How would you describe your skin's firmness to the touch — springy, or soft and pliable?", "a": ["Very springy, almost like in childhood", "Generally springy", "Moderately springy, sometimes feels soft", "Soft and pliable, without much noticeable spring"]}, {"q": "Do you notice volume loss in your cheeks compared to how your skin used to look?", "a": ["No changes at all", "Very slight changes", "Noticeable volume loss", "Pronounced volume loss, the face looks hollow"]}, {"q": "What's the texture of the skin around your eyes — smooth, or thin and crinkled like tissue paper?", "a": ["Smooth, firm", "Generally smooth", "Thin in places, with fine creases", "Noticeably thin and crinkled"]}, {"q": "Do you notice a difference between the condition of your hand skin and your face when it comes to signs of aging?", "a": ["No difference, everything looks youthful", "A slight difference", "Hands look somewhat older than the face", "A noticeable difference — hands clearly give away age"]}, {"q": "Does your skin look different after a full night's sleep compared to a poor one — is there a clear difference in how visible your lines are?", "a": ["Almost no difference", "A small difference, fresher after sleep", "A noticeable difference — poor sleep immediately 'adds' lines", "A very pronounced difference, wrinkles become much more visible"]}, {"q": "How does the skin on your décolletage compare to your face?", "a": ["Just as smooth and firm", "Minor differences", "Noticeably less firm than the face", "Clearly older-looking than the face, with pronounced changes"]}, {"q": "What do people usually say when they guess your age?", "a": ["Always guess younger than I am", "Generally guess correctly", "Sometimes guess older than I am", "Often guess significantly older than I am"]}, {"q": "How noticeably has your skin changed over the last 5 years in terms of wrinkles and firmness?", "a": ["Practically unchanged", "Minor changes", "Noticeable changes, especially around the eyes", "Very noticeable changes across the whole face"]}, {"q": "How deep are the lines that appear with expressive movement (laughing, surprise)?", "a": ["Very fine, barely noticeable", "Moderately pronounced", "Fairly deep", "Very deep and visible from a distance"]}, {"q": "How would you rate the overall pace at which your skin is aging compared to peers your age?", "a": ["Slower than most", "About the same as most", "A bit faster than I'd like", "Noticeably faster — this concerns me the most"]}]};
+
+const CATEGORIES = ["OD","SR","PN","WT"];
+const QUESTIONS_PER_CATEGORY = 20;
+
+function buildOrder(){
+  const order = [];
+  for(let i=0;i<QUESTIONS_PER_CATEGORY;i++){
+    for(const cat of CATEGORIES){
+      order.push({cat, q: QUESTIONS[cat][i]});
+    }
+  }
+  return order;
+}
+const ORDER = buildOrder();
+const TOTAL = ORDER.length;
+
+const AXIS_LABELS = {
+  OD: ["Dry","Oily","D","O"],
+  SR: ["Resistant","Sensitive","R","S"],
+  PN: ["Non-pigmented","Pigmented","N","P"],
+  WT: ["Tight","Wrinkle-prone","T","W"],
+};
+
+const TRAIT = {
+  O: "prone to excess oil and enlarged pores",
+  D: "prone to dryness and needs extra hydration",
+  S: "sensitive, and reacts quickly to irritants with redness or discomfort",
+  R: "resistant to external irritants and tolerates active ingredients well",
+  P: "prone to uneven tone and pigmented spots",
+  N: "even and stable in tone, with little tendency toward pigmentation",
+  W: "inclined toward early expression lines and a gradual loss of firmness",
+  T: "holding onto its natural firmness longer, with slower visible signs of aging",
+};
+
+const CARE = {
+  O: "oil control through light, non-comedogenic textures",
+  D: "intensive hydration and barrier repair",
+  S: "gentle care without harsh actives, introducing anything new gradually",
+  R: "room to experiment with active ingredients without much risk of irritation",
+  P: "daily SPF and tone-evening formulas",
+  N: "prevention and maintaining your skin's natural tonal balance",
+  W: "firmness support and early barrier reinforcement",
+  T: "preventive care without overloading the skin",
+};
+
+let state = { screen: "welcome", qIndex: 0, scores: {OD:0,SR:0,PN:0,WT:0} };
+
+function resetState(){
+  state = { screen: "welcome", qIndex: 0, scores: {OD:0,SR:0,PN:0,WT:0} };
+  render();
+}
+
+function computeCodeAndPct(scores){
+  let code = "";
+  const pcts = {};
+  for(const cat of CATEGORIES){
+    const raw = scores[cat];
+    let pct = (raw - QUESTIONS_PER_CATEGORY) / (QUESTIONS_PER_CATEGORY*3) * 100;
+    pct = Math.max(0, Math.min(100, pct));
+    pcts[cat] = pct;
+    const [,, lowLetter, highLetter] = AXIS_LABELS[cat];
+    code += pct < 50 ? lowLetter : highLetter;
+  }
+  return {code, pcts};
+}
+
+function buildDescription(code){
+  const [od, sr, pn, wt] = code.split("");
+  const opening = `Your skin is ${TRAIT[od]}, ${TRAIT[sr]}, ${TRAIT[pn]}, and ${TRAIT[wt]}.`;
+  const careLine = `In a daily routine, it's worth focusing on: ${CARE[od]}, ${CARE[sr]}, ${CARE[pn]}, and ${CARE[wt]}.`;
+  const closing = "This combination is your skin's current map, not a permanent verdict — it can shift with age, season, or hormonal changes, so it's worth revisiting this test every so often. 🤎";
+  return `<p>${opening}</p><p>${careLine}</p><p>${closing}</p>`;
+}
+
+function renderWelcome(){
+  document.getElementById("kicker").textContent = "Discover your skin, in full";
+  return `
+    <p class="lead">Welcome to the Verité Skin Type Test ✨</p>
+    <p>This isn't just a test to determine your skin type — it's a small journey toward understanding your skin more deeply.</p>
+    <p>We'll look at it as a whole: from how it behaves today, to the factors that may be written into your genetics. That's why a few questions will ask not just about you, but about your parents' and grandparents' skin too.</p>
+    <p>Ready to learn a little more about your skin? 🤎</p>
+    <button class="btn" onclick="goToInstructions()">Continue</button>
+  `;
+}
+
+function renderInstructions(){
+  return `
+    <p class="lead">This test has 80 questions and takes about 8–10 minutes.</p>
+    <p>Take your time — choose whichever answer describes you and your skin most closely. If you're not sure about a question regarding your family, just choose the closest option.</p>
+    <p>Ready? Let's begin ✨</p>
+    <button class="btn" onclick="startQuiz()">Let's begin ✨</button>
+  `;
+}
+
+function renderQuestion(){
+  const idx = state.qIndex;
+  const {cat, q} = ORDER[idx];
+  const pct = Math.round((idx / TOTAL) * 100);
+  const answersHtml = q.a.map((text, i) =>
+    `<button class="answer-btn" onclick="answer(${idx}, '${cat}', ${i+1})">${text}</button>`
+  ).join("");
+  document.getElementById("kicker").textContent = `Question ${idx+1} of ${TOTAL}`;
+  return `
+    <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+    <div class="question-text">${q.q}</div>
+    <div class="answers">${answersHtml}</div>
+  `;
+}
+
+function renderResults(){
+  const {code, pcts} = computeCodeAndPct(state.scores);
+  document.getElementById("kicker").textContent = "Your result";
+  let barsHtml = "";
+  for(const cat of CATEGORIES){
+    const [lowLabel, highLabel] = AXIS_LABELS[cat];
+    const pct = pcts[cat];
+    barsHtml += `
+      <div class="bar-row">
+        <div class="bar-labels"><span>${lowLabel}</span><span>${highLabel}</span></div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:${pct}%"></div>
+          <div class="bar-marker" style="left:${pct}%"></div>
+        </div>
+        <div class="bar-pct">${Math.round(pct)}%</div>
+      </div>
+    `;
+  }
+  return `
+    <div class="type-code">${code}</div>
+    ${barsHtml}
+    <div class="description">${buildDescription(code)}</div>
+    <button class="btn btn-secondary" onclick="resetState()">Take it again</button>
+  `;
+}
+
+function render(){
+  const app = document.getElementById("app");
+  if(state.screen === "welcome") app.innerHTML = renderWelcome();
+  else if(state.screen === "instructions") app.innerHTML = renderInstructions();
+  else if(state.screen === "quiz") app.innerHTML = renderQuestion();
+  else if(state.screen === "results") app.innerHTML = renderResults();
+  window.scrollTo({top:0, behavior:"instant"});
+}
+
+function goToInstructions(){ state.screen = "instructions"; render(); }
+function startQuiz(){ state.screen = "quiz"; state.qIndex = 0; state.scores = {OD:0,SR:0,PN:0,WT:0}; render(); }
+
+function answer(qIndex, cat, points){
+  if(qIndex !== state.qIndex) return; // guard against stale clicks
+  state.scores[cat] += points;
+  state.qIndex += 1;
+  if(state.qIndex >= TOTAL){
+    state.screen = "results";
+  }
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
